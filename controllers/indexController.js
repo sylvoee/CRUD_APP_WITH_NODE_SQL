@@ -1,4 +1,4 @@
-const customerSchema = require('../model/customerSchema');
+const schema = require('../model/schema');
 
 
 // Get customers
@@ -15,8 +15,8 @@ db.query("SELECT * FROM customer", function (error, customers, fields) {
 // post request to home
 module.exports = postCustomers = (req, res, next)=>{
 
-  const{name, age, address, item_purchase, cost} = req.body ;
-  db.query("INSERT INTO customer(name, age, address, item_purchase, cost) values(?, ?, ?, ?, ?)", [name, age, address,item_purchase,cost], function (error, results, fields){
+  const{name, age, address, email, phone_num} = req.body ;
+  db.query("INSERT INTO customer(name, age, address, email, phone_num) values(?, ?, ?, ?, ?)", [name, age, address, email , phone_num], function (error, results, fields){
   if (error) throw error;
   res.json({msg :'customer, was successfully inserted', results});
 });
@@ -39,8 +39,8 @@ module.exports = deleteCustomer = (req ,res, next) =>{
 
 // Updating a customer
 module.exports = updateCustomer = (req, res, next)=>{
-  const{id, age, address, item_purchase, cost} = req.body ;
-  db.query("UPDATE customer SET age = ?, address = ?, item_purchase = ?, cost = ?   WHERE id = ?", [age,address,item_purchase,cost, id], (err, results, fields)=>{
+  const{age, address, email, phone_num, id} = req.body ;
+  db.query("UPDATE customer SET age = ?, address = ?, email = ?, phone_num = ?   WHERE id = ?", [age, address, email, phone_num, id], (err, results, fields)=>{
    if(err) throw err
    if(results) res.json({})
   });

@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const dotgitignore = require('dotgitignore')();
 
 var router = require('./routes');
 var http = require('http');
